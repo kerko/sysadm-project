@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Project Proposal
 by Urs Oberdorf (141627) and Jan Kerkenhoff (141628)
 
@@ -30,3 +31,9 @@ Also vagrant reduces the effort to get the whole environment up and running to a
 * puppet manifests used to provision inside the vm and docker files
 * dockerfiles to create docker images we run in the vm
 * Report about the project
+=======
+sysadm-project
+==============
+
+repository for sysadmin project on vagrant and docker
+>>>>>>> 43c6f4ffc75b9c1a09805c74e2383d95a28782f6
