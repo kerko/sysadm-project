@@ -9,7 +9,7 @@ class opera ($path='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
   before => Exec["echo \"deb http://deb.opera.com/opera/ stable non-free\" >> /etc/apt/sources.list.d/opera.list"]
     }
   #add repository to repolist
-  exec {"deb http://deb.opera.com/opera/ stable non-free":
+  exec {"echo \"deb http://deb.opera.com/opera/ stable non-free\" >> /etc/apt/sources.list.d/opera.list":
   ## add check if already present
   }
   ->
