@@ -1,5 +1,5 @@
 
-$tools ["git" , "ruby", "python"]
+$tools = ["git" , "ruby", "python"]
 
 package { $tools: ensure => "installed" }
 
@@ -18,8 +18,8 @@ include docker
 
 ## apache docker container
 
-docker::image{'php:'
+docker::image{'php':
 image_tag => 'apache'
 }
 ## mysql docker container
-docker::image{'mysql:'}
+#docker::image{'mysql:'}

@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "webdevmachine"
+  config.vm.box = "webDev"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -64,9 +64,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the file default.pp in the manifests_path directory.
   #
    config.vm.provision "puppet" do |puppet|
-     puppet.manifests_path = "/../puppet/manifests"
-     puppet.manifest_file  = "/../puppet/manifests/default.pp"
-     puppet.module_path = "/../puppet/modules"
+     puppet.options = "--verbose --debug"
+     puppet.manifests_path = "../puppet/manifests"
+     puppet.manifest_file  = "default.pp"
+     puppet.module_path = "../puppet/modules"
    end
 
 
