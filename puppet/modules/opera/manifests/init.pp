@@ -1,4 +1,8 @@
-class opera {
+class opera ($path='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/X11R6/bin'){
+
+  Exec {
+    path    => "${path}",
+  }
   # installed required package
   package {"debian-archive-keyring":
   ensure => installed,
