@@ -1,7 +1,7 @@
 class googlechrome ($path='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/X11R6/bin', $destFile  ='google-chrome-stable_current_amd64.deb', $sourceURL ='https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb') {
 
   $required_packages = ['libnss3-1d',
-                        'libxss1',]
+                        'libxss1','libappindicator1']
 
   Exec {
     path    => "${path}",
@@ -26,4 +26,4 @@ class googlechrome ($path='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sb
     cwd     => '/tmp',
     unless  => 'dpkg -s google-chrome-stable|grep "ok installed"',
   }
-}                                                                                                                                                                                                                                             
+}
