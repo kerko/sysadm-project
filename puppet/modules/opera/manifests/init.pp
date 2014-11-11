@@ -1,8 +1,12 @@
-class opera {
+class opera ($path='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/X11R6/bin'){
+
+  Exec {
+    path    => "${path}",
+  }
   # installed required package
   package {"debian-archive-keyring":
   ensure => installed,
-  before => Exec["deb http://deb.opera.com/opera/ stable non-free"]
+  before => Exec["echo \"deb http://deb.opera.com/opera/ stable non-free\" >> /etc/apt/sources.list.d/opera.list"]
     }
   #add repository to repolist
   exec {"deb http://deb.opera.com/opera/ stable non-free":
