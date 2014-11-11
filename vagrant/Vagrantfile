@@ -3,15 +3,26 @@
 
 VAGRANTFILE_API_VERSION = "2"
 
-SYNCFOLDER_HOST = "/home/h41/tmp"
-SYNCFOLDER_GUEST = "/tmp"
+SYNCFOLDER_HOST = "~/tmp"
+SYNCFOLDER_GUEST = "/home/vagrant/tmp"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "ubuntu/trusty64"
+  # Box used
+  config.vm.box = "webDev"
 
+  # Foldersync
   config.vm.synced_folder SYNCFOLDER_HOST, SYNCFOLDER_GUEST
-  # Enable GUI
-#  config.vm.provider "virtualbox" do |vb|
-#	vb.gui = true
-#  end
+
+  # VirtualBoxconfig
+  config.vm.provider "virtualbox" do |vb|
+	vb.gui = true
+        vb.name = "webDevMachine"
+  end
+
+  # Puppetconfig
+  config.vm.provision "puppet" do |puppet|
+    puppet.options = "--verbose --debug"
+    puppet.manifests_path = "/manifests"
+    puppet.manifest_file = "webDev.pp"
+  end
 end
