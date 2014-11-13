@@ -1,14 +1,15 @@
 # Puppet Manifest for Web Development Tools
 
-# Browsers
+# Tools
 $tools = ["git" , "ruby", "python"]
 package { $tools: ensure => "installed" }
 
+# Browsers
 package { 'firefox':
   ensure => 'latest'
 }
 include googlechrome
-#  ::firefox{"firefox":}
+# Opera Repository currently broken (13.11.14)
 #include opera
 
 
