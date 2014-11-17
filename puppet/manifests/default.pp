@@ -35,15 +35,17 @@ docker::image{'mysql':
 require => CLASS['docker']
 }
 
-docker::run { 'run_mysql':
+docker::run { 'mysql':
   image => 'mysql',
+  use_name => true,
   # Must be set, otherwise SQL server wont run
   env => 'MYSQL_ROOT_PASSWORD=abc'
 }
 ->
-docker::run { 'run_apache':
+docker::run { 'webServer':
   image => 'php:apache',
-  ports => '80',
-  expose => '80',
-  links => 'mysql:db',
+  use_name => true,
+  #ports => '80',
+  #expose => '80',
+  links => ['mysql:db'],
 }
