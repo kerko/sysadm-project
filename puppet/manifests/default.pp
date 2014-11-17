@@ -19,11 +19,16 @@ include googlechrome
 ####
 
 #include docker
+#package { 'docker':
+#  ensure => latest,
+#}
+include docker
 
 ## apache docker container
 
-#docker::image{'php':
-#image_tag => 'apache'
-#}
+docker::image{'php':
+image_tag => 'apache',
+require => CLASS['docker'],
+}
 ## mysql docker container
-#docker::image{'mysql:'}
+docker::image{'mysql':}
