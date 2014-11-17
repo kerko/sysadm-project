@@ -31,4 +31,19 @@ image_tag => 'apache',
 require => CLASS['docker'],
 }
 ## mysql docker container
-docker::image{'mysql':}
+docker::image{'mysql':
+require => CLASS['docker']
+}
+
+docker::run { 'run_mysql':
+  image => 'mysql',
+  # Must be set, otherwise SQL server wont run
+  env => 'MYSQL_ROOT_PASSWORD=abc'
+}
+->
+docker::run { 'run_apache':
+  image => 'php:apache',
+  ports => '80',
+  expose => '80',
+  links => 'mysql:db',
+}
