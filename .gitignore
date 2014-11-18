@@ -21,6 +21,8 @@ test/tmp/
 _site/*
 .yardoc/
 doc/
+*.pdf
+*.pyg
 
 # Python
 *.pyc
