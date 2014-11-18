@@ -1,12 +1,19 @@
 VAGRANTFILE_API_VERSION = "2"
 
-SYNCFOLDER_HOST = "/tmp"
-SYNCFOLDER_GUEST = "/tmp"
+# SyncFolder on Host ist $HOME/vagrantWebDev
+SYNCFOLDER_ROOT = [ENV['HOME'],"/vagrantWebDev"].join()
+
+SYNCFOLDER_HOST_SHARE = SYNCFOLDER_ROOT + "/share"
+SYNCFOLDER_GUEST_SHARE = "/home/vagrant/share"
+
+SYNCFOLDER_HOST_WWW = SYNCFOLDER_ROOT + "/www"
+SYNCFOLDER_GUEST_WWW = "/var/www"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "webDev"
-  config.vm.synced_folder SYNCFOLDER_HOST, SYNCFOLDER_GUEST
+  config.vm.synced_folder SYNCFOLDER_HOST_SHARE, SYNCFOLDER_GUEST_SHARE, create: true
+  config.vm.synced_folder SYNCFOLDER_HOST_WWW, SYNCFOLDER_GUEST_WWW, create: true
 
   config.vm.provider "virtualbox" do |vb|
      # Start with Gui

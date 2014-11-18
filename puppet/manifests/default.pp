@@ -19,11 +19,33 @@ include googlechrome
 ####
 
 #include docker
+#package { 'docker':
+#  ensure => latest,
+#}
+include docker
 
 ## apache docker container
 
-#docker::image{'php':
-#image_tag => 'apache'
-#}
+docker::image{'php':
+image_tag => 'apache',
+require => CLASS['docker'],
+}
 ## mysql docker container
-#docker::image{'mysql:'}
+docker::image{'mysql':
+require => CLASS['docker']
+}
+
+docker::run { 'mysql':
+  image => 'mysql',
+  use_name => true,
+  # Must be set, otherwise SQL server wont run
+  env => 'MYSQL_ROOT_PASSWORD=abc'
+}
+->
+docker::run { 'webServer':
+  image => 'php:apache',
+  use_name => true,
+  #ports => '80',
+  #expose => '80',
+  links => ['mysql:db'],
+}
