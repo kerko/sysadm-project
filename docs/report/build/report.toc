@@ -1,0 +1,15 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {section}{\numberline {2}SLA}{1}{section.2}
+\contentsline {section}{\numberline {3}Survey of similar projects}{2}{section.3}
+\contentsline {section}{\numberline {4}Actual Project}{2}{section.4}
+\contentsline {subsection}{\numberline {4.1}Creating a base Image for Vagrant}{2}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Creating the environment using Vagrant}{2}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Using Docker to provide application runtime environment inside the \gls {VM}}{3}{subsection.4.3}
+\contentsline {section}{\numberline {5}Results and discussion}{3}{section.5}
+\contentsline {section}{\numberline {6}Conclusions}{3}{section.6}
+\contentsline {section}{\numberline {7}Appendix}{4}{section.7}
+\contentsline {subsection}{\numberline {7.1}Vagrantfile}{4}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Puppetfiles}{4}{subsection.7.2}
+\contentsline {subsubsection}{\numberline {7.2.1}default.pp}{5}{subsubsection.7.2.1}
+\contentsline {subsubsection}{\numberline {7.2.2}module manifests}{6}{subsubsection.7.2.2}
