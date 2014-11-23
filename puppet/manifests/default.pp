@@ -2,15 +2,15 @@
 
 # Tools
 $tools = ["git" , "ruby", "python"]
-package { $tools: ensure => "installed" }
+package { $tools: ensure => "latest" }
 
-include googlechrome
 # Browsers
+include googlechrome
+include opera
 package { 'firefox':
   ensure => 'latest'
 }
-# Opera Repository currently broken (13.11.14)
-#include opera
+# Think about firefox nightly builds and other bleeding edge browser builds
 
 
 

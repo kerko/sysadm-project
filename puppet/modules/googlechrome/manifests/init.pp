@@ -65,5 +65,9 @@ class googlechrome (
 
   package { 'google-chrome-stable':
     ensure => 'latest',
+    require => [
+                APT_KEY['googleChrome_key'],
+                APT::SOURCE['googleChrome_repository'],
+               ],
   }
 }

@@ -65,5 +65,9 @@ class opera (
 
   package { 'opera':
     ensure => 'latest',
+    require => [
+                APT_KEY['opera_key'],
+                APT::SOURCE['opera_repository'],
+               ],
   }
 }
