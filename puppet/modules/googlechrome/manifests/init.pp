@@ -39,7 +39,6 @@
 #    require => EXEC['update_repository_chrome'],
 #  }
 #}
-#
 ################################################################################
 #
 #Install GoogleChrome Browser with the puppet apt module

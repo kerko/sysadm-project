@@ -18,11 +18,7 @@ package { 'firefox':
 #### Add Docker and Containers
 ####
 
-#include docker
-#package { 'docker':
-#  ensure => latest,
-#}
-#include docker
+include docker
 
 ## apache docker container
 
