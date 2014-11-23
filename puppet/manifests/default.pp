@@ -25,8 +25,8 @@ include docker
 ## apache docker container
 
 docker::image{'php':
-image_tag => 'apache',
-require => CLASS['docker'],
+  image_tag => 'apache',
+  require => CLASS['docker'],
 }
 ## mysql docker container
 docker::image{'mysql':
@@ -37,14 +37,16 @@ docker::run { 'mysql':
   image => 'mysql',
   use_name => true,
   # Must be set, otherwise SQL server wont run
-  env => 'MYSQL_ROOT_PASSWORD=abc'
+  env => 'MYSQL_ROOT_PASSWORD=abc',
+  restart_service => false,
 }
-->
+
 docker::run { 'webServer':
   image => 'php:apache',
+  restart_service => false,
   use_name => true,
   ports => '80',
   expose => '80',
   links => ['mysql:db'],
-  volumes => '/var/www',
+  require => DOCKER::RUN['mysql'],
 }
