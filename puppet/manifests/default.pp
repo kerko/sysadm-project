@@ -1,19 +1,20 @@
 # Puppet Manifest for Web Development Tools
 
 # Tools
-$tools = ["git" , "ruby", "python"]
-package { $tools: ensure => "installed" }
+$tools = ['git' , 'ruby', 'python']
+package { $tools: ensure => 'latest' }
+
+#Editors
+package { 'vim': ensure => 'latest' }
+include atom
+include sublime
 
 # Browsers
 package { 'firefox':
   ensure => 'latest'
 }
 include googlechrome
-# Opera Repository currently broken (13.11.14)
-#include opera
-
-
-
+include opera
 
 #### Add Docker and Containers
 ####
@@ -26,7 +27,7 @@ include docker
 
 ## apache docker container
 
-docker::image{'php':
+#docker::image{'php':
 image_tag => 'apache',
 require => CLASS['docker'],
 }
