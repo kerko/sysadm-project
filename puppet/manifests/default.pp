@@ -1,26 +1,28 @@
 # Puppet Manifest for Web Development Tools
 
 # Tools
-$tools = ["git" , "ruby", "python"]
-package { $tools: ensure => "latest" }
+$tools = ['git' , 'ruby', 'python', 'wireshark', 'filezilla', 'mysql-workbench','mysql-client']
+package { $tools: ensure => 'latest' }
 
 #Editors
 package { 'vim': ensure => 'latest' }
 include atom
 include sublime
 
-# Browsers
 include googlechrome
-include opera
+# Browsers
 package { 'firefox':
   ensure => 'latest'
 }
-# Think about firefox nightly builds and other bleeding edge browser builds
 
-#### Add Docker and Containers
-####
+include googlechrome
+include opera
+
+
+#### Add Docker and Containers ####
 
 include docker
+
 
 ## apache docker container
 
