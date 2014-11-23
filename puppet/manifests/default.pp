@@ -9,31 +9,36 @@ package { 'vim': ensure => 'latest' }
 include atom
 include sublime
 
+include googlechrome
 # Browsers
 package { 'firefox':
   ensure => 'latest'
 }
+<<<<<<< HEAD
 include googlechrome
 include opera
+=======
+# Opera Repository currently broken (13.11.14)
+#include opera
 
 #### Add Docker and Containers
 ####
 
-#include docker
-#package { 'docker':
-#  ensure => latest,
-#}
 include docker
+package { 'docker':
+  ensure => latest,
+}
+#include docker
 
 ## apache docker container
 
-#docker::image{'php':
+docker::image{'php':
 image_tag => 'apache',
 require => CLASS['docker'],
 }
 ## mysql docker container
 docker::image{'mysql':
-require => CLASS['docker']
+  require => CLASS['docker']
 }
 
 docker::run { 'mysql':
@@ -46,7 +51,8 @@ docker::run { 'mysql':
 docker::run { 'webServer':
   image => 'php:apache',
   use_name => true,
-  #ports => '80',
-  #expose => '80',
+  ports => '80',
+  expose => '80',
   links => ['mysql:db'],
+  volumes => '/var/www',
 }
