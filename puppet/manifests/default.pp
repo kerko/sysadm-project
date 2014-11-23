@@ -1,7 +1,7 @@
 # Puppet Manifest for Web Development Tools
 
 # Tools
-$tools = ['git' , 'ruby', 'python']
+$tools = ['git' , 'ruby', 'python', 'wireshark', 'filezilla', 'mysql-workbench','mysql-client']
 package { $tools: ensure => 'latest' }
 
 #Editors
@@ -14,21 +14,15 @@ include googlechrome
 package { 'firefox':
   ensure => 'latest'
 }
-<<<<<<< HEAD
+
 include googlechrome
 include opera
-=======
-# Opera Repository currently broken (13.11.14)
-#include opera
 
-#### Add Docker and Containers
-####
+
+#### Add Docker and Containers ####
 
 include docker
-package { 'docker':
-  ensure => latest,
-}
-#include docker
+
 
 ## apache docker container
 
