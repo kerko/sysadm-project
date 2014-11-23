@@ -42,7 +42,6 @@
 ################################################################################
 #
 #Install Opera Bowser with the puppet apt module
-#Repository still broken (23.11.2014)
 class opera (
   $url_key = 'http://deb.opera.com/archive.key',
   $url_repo = 'http://deb.opera.com/opera/',
@@ -65,5 +64,9 @@ class opera (
 
   package { 'opera':
     ensure => 'latest',
+    require => [
+                APT_KEY['opera_key'],
+                APT::SOURCE['opera_repository'],
+               ],
   }
 }

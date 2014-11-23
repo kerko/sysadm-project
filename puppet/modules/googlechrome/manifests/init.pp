@@ -39,7 +39,6 @@
 #    require => EXEC['update_repository_chrome'],
 #  }
 #}
-#
 ################################################################################
 #
 #Install GoogleChrome Browser with the puppet apt module
@@ -65,5 +64,9 @@ class googlechrome (
 
   package { 'google-chrome-stable':
     ensure => 'latest',
+    require => [
+                APT_KEY['googleChrome_key'],
+                APT::SOURCE['googleChrome_repository'],
+               ],
   }
 }
