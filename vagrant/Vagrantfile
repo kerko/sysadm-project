@@ -20,6 +20,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      vb.gui = true
      # Set hostname
      vb.name = "webDevMachine"
+     vb.memory = 1024
+     vb.cpus = 2
+
   end
 
    # Puppet
