@@ -1,5 +1,5 @@
 \documentclass[a4paper,11pt,pdftex,english]{article}
-
+\renewcommand{\arraystretch}{1.5}
 \usepackage{babel}
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -23,7 +23,7 @@ pagebackref=true, hyperindex=true,bookmarksopen=true]{hyperref}
 \newlist{arrowlist}{itemize}{1}
 \setlist[arrowlist]{label=$\Rightarrow$}
 
-\usepackage[acronym, section, nonumberlist]{glossaries}
+\usepackage[acronym, section, nonumberlist, toc]{glossaries}
 \usepackage{minted}
 \usemintedstyle{emacs}
 

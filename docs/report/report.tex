@@ -34,10 +34,11 @@ We will provide a development environment with the following software:
 \begin{itemize}
 \item Chrome, Opera and Firefox
 \item git
-\item Atom as a graphical editor
-\item optional Ruby and/or Python
+\item Atom, Vim, Sublime as editors
+\item Ruby and Python
 \item Wireshark for debugging
-\item additional tools needed for web development
+\item Tools for mysql( mysql-workbench,mysql-client)
+\item Filezilla for FTP 
 \end{itemize}
 Following Docker containers will also run in the Vagrant provided \gls{VM}:
 \begin{itemize}
@@ -47,7 +48,7 @@ Following Docker containers will also run in the Vagrant provided \gls{VM}:
 
 \section{Survey of similar projects}
 
-We looked similar projects and while we found many projects that setup development environments using Vagrant and Puppet, one of them used Vagrant to create the \gls{VM} your actutally developing in. The normal approach with Vagrant is to use to create your production environment and then develop on your local machine. There exists some projects which aim to setup the local developer machines, most promising looking are Boxeen by Github for Mac OS X and Boxstarter for Windows. 
+We looked for similar projects and while we found many projects that setup development environments using Vagrant and Puppet, none of them used Vagrant to create the \gls{VM} your actually developing in. The normal approach with Vagrant is to use to create your production environment and then develop on your local machine. There exists some projects which aim to setup the local developer machines, most promising looking are Boxeen by Github for Mac OS X and Boxstarter for Windows. 
 There are even web services aimed at creating environments using Puppet and Vagrant, most notably is PuPHPet, which offers a sleek web GUI to setup web server images the way you want them to be.
 
 \section{Actual Project}
@@ -66,12 +67,18 @@ Full guide can be found here : \url{https://docs.Vagrantup.com/v2/virtualbox/box
 
 \subsection{Creating the environment using Vagrant}
 
-Vagrant uses our previous created \gls{box} to set up the Ubuntu \gls{VM} with everything we want to include.  When we call Vagrant up it imports the specified base \gls{box} and starts it, Vagrant then also takes care of mounting shared folder inside the \gls{VM}, some of them are specified and some are automatically mounted like the ones needed for the Puppet run. When the machine successfully started, Puppet is run with our manifest to provision the \gls{VM} with everything we want. In order to do this, Puppet installs the repositories needed for the browsers. Afterwards Puppet installs the packages for the browsers and tools from the repositories. After that Puppet takes care of Docker, by installing the package and downloading the Docker container images onto the host. Afterwards Puppet runs the Docker containers and the application runtime , in our case a simple html+php+mysql web server, is ready to accept connections.
+Vagrant uses our previous created \gls{box} to set up the Ubuntu \gls{VM} with everything we want to include.  When we call \verb|Vagrant up| it imports the specified base \gls{box} and starts it, Vagrant then also takes care of mounting shared folder inside the \gls{VM}, some of them are specified and some are automatically mounted like the ones needed for the Puppet run. When the machine successfully started, Puppet is run with our manifest to provision the \gls{VM} with everything we want. In order to do this, Puppet installs the repositories needed for the browsers. Afterwards Puppet installs the packages for the browsers and tools from the repositories. After that Puppet takes care of Docker, by installing the package and downloading the Docker container images onto the host. Afterwards Puppet runs the Docker containers and the application runtime , in our case a simple html+php+mysql web server, is ready to accept connections.After initialy using \verb|exec|  commands in puppet to add the repositorys to ubuntu, we switched to the more elegant way of making use of the puppet APT module. Using the puppet APT module we added all the needed \glspl{repository} needed for the software we wanted to install so puppet can handle them via the package manager. Most of the tools were already available in the standard \gls{repository} shipping with ubuntu, but some like the web browsers or Atom and Sublime required others.
+While working with the machine we noticed that the standard values for vagrant \glspl{VM} are not going to cut it in terms of memory requirements and CPU power. To combat this problem we simply added the following two lines in the vagrant file to increase the memory to one Gigabyte and the CPU cores to two.
 
-\subsection{Using Docker to provide application runtime environment inside the \gls{VM}}
+\begin{minted}{ruby}
+	vb.memory = 1024
+	vb.cpus = 2
+\end{minted}
 
+\subsection{Using Docker to provide application run time environment inside the \gls{VM}}
+Since we decided to run our web server and mysql server in docker containers and not the actual \gls{VM}, we looked for the best way this would be accomplished. We found the approved docker module in the puppet forge which made it really easy to manage docker containers via puppet. All we needed was to \mint{puppet}|include docker| followed by some \mint{puppet}|docker::image| and \mint{puppet}|docker::run| types to get our two containers up and running.The full sources are available in the appendix and on our github repository. The containers are linked to each other so that the webserver can access the DB, without the need for exposed ports on the DB server itself. Also we shared the \verb|www| directory into the webserver container so that it can instantly start to serve the web page the developer created.
 
-
+After having a enormous struggle to find a way to properly manage the docker containers in regards to restarts or shutdowns, since using the standard docker commands did not work in their expected way. We finally figured out the module generates and uses operating system build-in service files to manage the docker containers and every container resembles its own service. This was one of the reasons why we couldn't properly shutdown the docker containers, since the services were started via Upstart and init scripts they automatically restarted every time we shut them down. After this discovery we tried managing the containers via the \verb|service| command, which yielded much better results. It took several hours to troubleshoot these issues which was partially caused by the very sparse documentation of the module.
 
 \section{Results and discussion}
 
@@ -84,6 +91,24 @@ discussion of all problems you have encountered.
 
 So what is the punchline, does it work or not? Do you recommend doing this
 for others?
+
+\section{User Hand Book}
+This section aims to show how to setup our vagrant environment so you can test and use it in the way intended by our project.
+This project requires the following things :
+\begin{itemize}
+\item Virtual box, we tested this setup with 4.3.2 but newer versions should work too
+\item Vagrant, we used version 1.6.5 but newer versions should work too
+\item machine powerful enough to run a \gls{VM} with atleast 1GB of memory
+\item Git to download the project files
+\item Internet access to download the vagrant base \gls{box}
+\end{itemize}
+
+After you have installed Vagrant and Virtual box the first step is to download our project files from our project repository to a directory of your choice. After opening a shell in the directory where you would like to setup our project run: \mint{bash}|git clone git@github.com:kerko/sysadm-project.git|
+Now you need to get the vagrant base box it is located at \url{https://www.dropbox.com/s/1is6c4fuybb59hc/package.box?dl=0} save it to your current directory or just use \mint{bash}| wget - |
+The next step is to add the box to Vagrant so it can be used as the base box \mint{bash}|vagrant box add package.bos --name webDev| The last step is the simplest step but takes the longest, go into your vagrant directory and just do: \mint{bash}|vagrant up| Vagrant now takes care of everything, imports the basebox, creating the \gls{VM} and running puppet to provision everything. The first run takes something between 20-40 minutes depending on your internet connection since puppet download the docker images the first time its run and also all the software.
+
+
+
 \cleardoublepage{}
 \section{Appendix}
 \subsection{Vagrantfile}
@@ -97,11 +122,24 @@ Manifest to install googlechrome:
 \inputminted[linenos=true]{puppet}{../../puppet/modules/googlechrome/manifests/init.pp}
 Manifest to install opera:
 \inputminted[linenos=true]{puppet}{../../puppet/modules/opera/manifests/init.pp}
+Manifest to install atom:
+\inputminted[linenos=true]{puppet}{../../puppet/modules/atom/manifests/init.pp}
+Manifest to install sublime:
+\inputminted[linenos=true]{puppet}{../../puppet/modules/sublime/manifests/init.pp}
 
-List of modules from the puppet forge: \\
-\begin{tabular}{l r}
-Docker &  \url{https://forge.puppetlabs.com/garethr/docker} \\
 
+\subsubsection{List of used modules from the puppet forge:} 
+\begin{tabular}{l | c | c  | p{5cm}}
+Module name & Version & Author & URL \\
+\hline
+\hline
+docker & 2.0.0 & Gareth Rushgrove &\url{https://forge.puppetlabs.com/garethr/docker}  \\
+apt & 1.7.0 & Puppet Labs & \url{https://forge.puppetlabs.com/puppetlabs/apt}\\
+\hline 
+Dependency modules \\
+\hline 
+epel & 1.0.0 & Michael Stahnke & \url{https://forge.puppetlabs.com/stahnma/epel} \\
+stdlib & 4.4.0 & Puppet Labs & \url{https://forge.puppetlabs.com/puppetlabs/stdlib} \\
 \end{tabular}
 
 \cleardoublepage{}
