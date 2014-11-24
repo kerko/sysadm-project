@@ -12,6 +12,7 @@ SYNCFOLDER_GUEST_WWW = "/var/www"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "webDev"
+  config.vm.box_url = "https://s3.eu-central-1.amazonaws.com/vagrantsysadm/package.box"
   config.vm.synced_folder SYNCFOLDER_HOST_SHARE, SYNCFOLDER_GUEST_SHARE, create: true
   config.vm.synced_folder SYNCFOLDER_HOST_WWW, SYNCFOLDER_GUEST_WWW, create: true
 
