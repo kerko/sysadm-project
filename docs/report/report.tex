@@ -93,7 +93,7 @@ So what is the punchline, does it work or not? Do you recommend doing this
 for others?
 
 \section{User Hand Book}
-This section aims to show how to setup our vagrant environment so you can test and use it in the way intended by our project.
+This section aims to show you how to setup our vagrant environment so you can test and use it in the way intended by our project.
 This project requires the following things :
 \begin{itemize}
 \item Virtual box, we tested this setup with 4.3.2 but newer versions should work too
@@ -104,8 +104,7 @@ This project requires the following things :
 \end{itemize}
 
 After you have installed Vagrant and Virtual box the first step is to download our project files from our project repository to a directory of your choice. After opening a shell in the directory where you would like to setup our project run: \mint{bash}|git clone git@github.com:kerko/sysadm-project.git|
-Now you need to get the vagrant base box it is located at \url{https://www.dropbox.com/s/1is6c4fuybb59hc/package.box?dl=0} save it to your current directory or just use \mint{bash}| wget - |
-The next step is to add the box to Vagrant so it can be used as the base box \mint{bash}|vagrant box add package.bos --name webDev| The last step is the simplest step but takes the longest, go into your vagrant directory and just do: \mint{bash}|vagrant up| Vagrant now takes care of everything, imports the basebox, creating the \gls{VM} and running puppet to provision everything. The first run takes something between 20-40 minutes depending on your internet connection since puppet download the docker images the first time its run and also all the software.
+The next last step takes the longest, go into your vagrant directory and just do: \mint{bash}|vagrant up| Vagrant now takes care of everything, imports the basebox,including downloading it from Amazon S3, creating the \gls{VM} and running puppet to provision everything. The first run takes something between 20-40 minutes depending on your internet connection since puppet download the docker images the first time its run and also all the software.
 
 
 
