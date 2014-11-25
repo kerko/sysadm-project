@@ -9,7 +9,7 @@
     #
     # === Authors
     #
-    # Urs Oberdorf <urs.oberdorf@hig.no .com>
+    # Urs Oberdorf <urs.oberdorf@hig.no>
     #
     # === Copyright
     #
