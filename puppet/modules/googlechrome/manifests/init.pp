@@ -1,6 +1,6 @@
 #Install GoogleChrome Browser with the puppet apt module
 class googlechrome (
-  $url_key = 'https://dl-ssl.google.com/linux/linux_signing_key.pub',
+  $url_key  = 'https://dl-ssl.google.com/linux/linux_signing_key.pub',
   $url_repo = 'http://dl.google.com/linux/chrome/deb/',
 ){
   include apt
@@ -8,7 +8,7 @@ class googlechrome (
   apt_key { 'googleChrome_key':
     ensure => 'present',
     source => $url_key,
-    id     => '7FAC5991', # Last 8 digits of Fingerprint    
+    id     => '7FAC5991', # Last 8 digits of Fingerprint
   }
 
   apt::source { 'googleChrome_repository':
