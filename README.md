@@ -5,14 +5,14 @@ IMT3292 System Administration Project
 We provide a development environment with the following software:
 
 
-*Chrome, Opera and Firefox
-*git
-*Atom, Vim, Sublime as editors
-*Ruby and Python
-*Wireshark for debugging
-*Tools for mysql( mysql-workbench,mysql-client)
-*Filezilla for FTP
-*htop for monitoring
+* Chrome, Opera and Firefox
+* git
+* Atom, Vim, Sublime as editors
+* Ruby and Python
+* Wireshark for debugging
+* Tools for mysql( mysql-workbench,mysql-client)
+* Filezilla for FTP
+* htop for monitoring
 
 Following Docker containers will also run in the Vagrant provided VM:
 
