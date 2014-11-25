@@ -28,7 +28,8 @@ doc/
 *.glo
 *.gls
 *.ist
-
+*.acr
+*.alg
 
 
 # Python
