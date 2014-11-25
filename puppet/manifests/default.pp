@@ -22,8 +22,9 @@ include opera
 include docker
 
 # Docker volume folders
-$ubuntu_folder = '/home/vagrant/src'
-$dockercontainer_apache_folder = '/var/www/html'
+$ubuntu_syncFolder = '/home/vagrant/src'
+$dockercontainer_apache_syncFolder = '/var/www/html'
+$volumes_apache = "${ubuntu_syncFolder}:${dockercontainer_apache_syncFolder}"
 
 ## apache docker container
 
@@ -49,6 +50,6 @@ docker::run { 'webServer':
   ports => '80',
   expose => '80',
   links => ['mysql:db'],
-  volumes => $ubuntu_folder:$dockercontainer_apache_folder,,
+  volumes => $volumes_apache,
   require => DOCKER::RUN['mysql'],
 }
