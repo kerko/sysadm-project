@@ -1,10 +1,9 @@
 <!-- Static page with some help for using the web developer vagrant machine -->
 <html>
   <body>
-    <h1>Welcome web developer.</h1>
+    <h1><center>Welcome web developer.</center></h1>
 
-    <br>
-    Here are some helpful commands. <br>
+    <h2>Here are some helpful commands. </h2>
 
     <ul>
       <li>Show informations on the state of docker containers
@@ -12,5 +11,22 @@
       <li>Show the IP address of the apache server
         <ul><li>"sudo docker inspect -f "{{.NetworkSettings.IPAddress}}" 'container name'"</ul><br>
     </ul>
+
+    <h2>A list of the installed software.</h2>
+    <ul>
+      <li>Chrome, Opera and Firefox
+      <li> git
+      <li> Atom, Vim, Sublime as editors
+      <li> Ruby and Python
+      <li> Wireshark for debugging
+      <li> Tools for mysql( mysql-workbench,mysql-client)
+      <li> Filezilla for FTP 
+      <li> htop for monitoring
+    </ul><br>
+    <h2>Following Docker containers will also run in the Vagrant provided VM</h2>
+      <ul>
+        <li> Webserver (apache)
+        <li> Database (mysql)
+      </ul>
   </body>
 </html>
