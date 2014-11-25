@@ -1,8 +1,8 @@
 # Puppet Manifest for Web Development Tools
 
 # Tools
-$tools = ['git' , 'ruby', 'python', 'wireshark',
-          'filezilla', 'mysql-workbench','mysql-client']
+$tools = ['git' , 'ruby', 'python', 'wireshark', 'filezilla',
+          'mysql-workbench','mysql-client']
 package { $tools: ensure => 'latest' }
 
 #Editors
@@ -26,10 +26,10 @@ include docker
 
 
 ## apache docker container
-
+->
 docker::image{'php':
   image_tag => 'apache',
-  require => CLASS['docker'],
+  require   => CLASS['docker'],
 }
 ## mysql docker container
 docker::image{'mysql':
@@ -37,19 +37,17 @@ docker::image{'mysql':
 }
 
 docker::run { 'mysql':
-  image => 'mysql',
+  image    => 'mysql',
   use_name => true,
   # Must be set, otherwise SQL server wont run
-  env => 'MYSQL_ROOT_PASSWORD=abc',
-  restart_service => false,
+  env      => 'MYSQL_ROOT_PASSWORD=abc'
 }
-
+->
 docker::run { 'webServer':
-  image => 'php:apache',
-  restart_service => false,
+  image    => 'php:apache',
   use_name => true,
-  ports => '80',
-  expose => '80',
-  links => ['mysql:db'],
-  require => DOCKER::RUN['mysql'],
+  ports    => '80',
+  expose   => '80',
+  links    => ['mysql:db'],
+  volumes  => '/var/www',
 }

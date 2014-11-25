@@ -4,12 +4,8 @@ class atom {
 
   apt::ppa { 'ppa:webupd8team/atom': }
 
-
-
   package{'atom':
-  ensure => latest,
-  require => Apt::Ppa['ppa:webupd8team/atom']
+    ensure  => latest,
+    require => Apt::Ppa['ppa:webupd8team/atom']
   }
-
-
 }

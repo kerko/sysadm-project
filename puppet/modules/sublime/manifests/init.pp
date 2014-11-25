@@ -4,12 +4,8 @@ class sublime {
 
   apt::ppa { 'ppa:webupd8team/sublime-text-3': }
 
-
-
   package{'sublime-text-installer':
-  ensure => latest,
-  require => Apt::Ppa['ppa:webupd8team/sublime-text-3']
+    ensure  => latest,
+    require => Apt::Ppa['ppa:webupd8team/sublime-text-3']
   }
-
-
 }
