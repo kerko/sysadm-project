@@ -102,7 +102,7 @@ This project requires the following things :
 
 
 After you have installed Vagrant and Virtual box the first step is to download our project files from our project repository to a directory of your choice. After opening a shell in the directory where you would like to setup our project run: \mint{bash}|git clone git@github.com:kerko/sysadm-project.git|
-The next last step takes the longest, go into your vagrant directory and just do: \mint{bash}|vagrant up| Vagrant now takes care of everything, imports the basebox,including downloading it from Amazon S3, creating the \gls{VM} and running puppet to provision everything. The first run takes something between 20-40 minutes depending on your internet connection since puppet download the docker images the first time its run and also all the software.
+The next last step takes the longest, go into your vagrant directory and just do: \mint{bash}|vagrant up| Vagrant now takes care of everything, imports the base box, including downloading it from Amazon S3, creating the \gls{VM} and running puppet to provision everything. The first run takes something between 20-40 minutes depending on your internet connection since puppet downloads the docker images the first time its run and also installs all the software.
 
 
 
