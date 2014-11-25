@@ -6,8 +6,9 @@
 \begin{document}
 
 \maketitle
+\includegraphics[scale=0.9]{../vagrantdockerpuppet.png}
 
-\abstract{Supplying and managing consistent development environments across several different devices and different operating systems is a pain. Using Vagrant and Docker we set out to give an easy, consistent and scalable solution offering preconfigured Vagrant Images that contain the whole development machine, including docker containers to model the production environment you develop against. Only downside of our approach is the fact that developing now takes place in the virtual machine and not the developer machines native operating system}
+\abstract{Supplying and managing consistent development environments across several different devices and different operating systems is a pain. Using Vagrant and Docker we set out to give an easy, consistent and scale able solution offering preconfigured Vagrant Images that contain the whole development machine, including docker containers to model the production environment you develop against. Only downside of our approach is the fact that developing now takes place in the virtual machine and not the developer machines native operating system}
 
 \thispagestyle{empty}
 
@@ -124,6 +125,12 @@ Manifest to install atom:
 \inputminted[linenos=true]{Puppet}{../../Puppet/modules/atom/manifests/init.pp}
 Manifest to install sublime:
 \inputminted[linenos=true]{Puppet}{../../Puppet/modules/sublime/manifests/init.pp}
+Manifest to add Welcome Page:
+\inputminted[linenos=true]{Puppet}{../../Puppet/modules/welcome/manifests/init.pp}
+Htmlpage template for welcome page
+\inputminted[linenos=true]{Html}{../../Puppet/modules/welcome/templates/welcomePage.html}
+bash template for welcome.sh
+\inputminted[linenos=true]{bash}{../../Puppet/modules/welcome/templates/welcomeScript.sh}
 
 
 \subsubsection{List of used modules from the Puppet forge:} 
@@ -145,7 +152,5 @@ stdlib & 4.4.0 & Puppet Labs & \url{https://forge.Puppetlabs.com/Puppetlabs/stdl
 
 \printglossary[style=altlist,title=Glossary]
 
-\bibliographystyle{acmdoi}
-\bibliography{template}
 
 \end{document}

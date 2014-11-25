@@ -1,7 +1,8 @@
 # Puppet Manifest for Web Development Tools
 
 # Tools
-$tools = ['git' , 'ruby', 'python', 'wireshark', 'filezilla', 'mysql-workbench','mysql-client','htop']
+$tools = ['git' , 'ruby', 'python', 'wireshark', 'filezilla',
+          'mysql-workbench','mysql-client','htop']
 package { $tools: ensure => 'latest' }
 
 #Editors
