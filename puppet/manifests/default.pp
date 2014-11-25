@@ -17,11 +17,13 @@ package { 'firefox':
 include googlechrome
 include opera
 
-#
 #### Add Docker and Containers ####
 
 include docker
 
+# Docker volume folders
+$ubuntu_folder = '/home/vagrant/src'
+$dockercontainer_apache_folder = '/var/www/html'
 
 ## apache docker container
 
@@ -47,6 +49,6 @@ docker::run { 'webServer':
   ports => '80',
   expose => '80',
   links => ['mysql:db'],
-  volumes => '/home/vagrant/src:/var/www/html',
+  volumes => $ubuntu_folder:$dockercontainer_apache_folder,,
   require => DOCKER::RUN['mysql'],
 }

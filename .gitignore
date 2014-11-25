@@ -23,6 +23,14 @@ _site/*
 doc/
 *.pdf
 *.pyg
+*.acn
+*.glg
+*.glo
+*.gls
+*.ist
+*.acr
+*.alg
+
 
 # Python
 *.pyc
