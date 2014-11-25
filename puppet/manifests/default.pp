@@ -1,21 +1,21 @@
 # Puppet Manifest for Web Development Tools
 
 # Tools
-$tools = ['git' , 'ruby', 'python', 'wireshark', 'filezilla', 'mysql-workbench','mysql-client','htop']
-package { $tools: ensure => 'latest' }
+#$tools = ['git' , 'ruby', 'python', 'wireshark', 'filezilla', 'mysql-workbench','mysql-client','htop']
+#package { $tools: ensure => 'latest' }
 
-#Editors
-package { 'vim': ensure => 'latest' }
-include atom
-include sublime
+##Editors
+#package { 'vim': ensure => 'latest' }
+#include atom
+#include sublime
 
-# Browsers
-package { 'firefox':
-  ensure => 'latest'
-}
+## Browsers
+#package { 'firefox':
+#  ensure => 'latest'
+#}
 
-include googlechrome
-include opera
+#include googlechrome
+#include opera
 
 #### Add Docker and Containers ####
 
@@ -32,6 +32,7 @@ docker::image{'php':
   image_tag => 'apache',
   require => CLASS['docker'],
 }
+
 ## mysql docker container
 docker::image{'mysql':
   require => CLASS['docker']
@@ -53,3 +54,6 @@ docker::run { 'webServer':
   volumes => $volumes_apache,
   require => DOCKER::RUN['mysql'],
 }
+
+# WelcomePage
+include welcome
