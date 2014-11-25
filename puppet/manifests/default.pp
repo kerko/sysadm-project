@@ -1,7 +1,7 @@
 # Puppet Manifest for Web Development Tools
 
 # Tools
-$tools = ['git' , 'ruby', 'python', 'wireshark', 'filezilla', 'mysql-workbench','mysql-client']
+$tools = ['git' , 'ruby', 'python', 'wireshark', 'filezilla', 'mysql-workbench','mysql-client','htop']
 package { $tools: ensure => 'latest' }
 
 #Editors
@@ -9,7 +9,6 @@ package { 'vim': ensure => 'latest' }
 include atom
 include sublime
 
-include googlechrome
 # Browsers
 package { 'firefox':
   ensure => 'latest'
@@ -18,7 +17,7 @@ package { 'firefox':
 include googlechrome
 include opera
 
-
+#
 #### Add Docker and Containers ####
 
 include docker
@@ -40,15 +39,14 @@ docker::run { 'mysql':
   use_name => true,
   # Must be set, otherwise SQL server wont run
   env => 'MYSQL_ROOT_PASSWORD=abc',
-  restart_service => false,
 }
 
 docker::run { 'webServer':
   image => 'php:apache',
-  restart_service => false,
   use_name => true,
   ports => '80',
   expose => '80',
   links => ['mysql:db'],
+  volumes => '/home/vagrant/src:/var/www/html',
   require => DOCKER::RUN['mysql'],
 }
