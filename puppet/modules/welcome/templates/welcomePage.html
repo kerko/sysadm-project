@@ -1,9 +1,16 @@
-# Welcome page for web developers
-
+<!-- Static page with some help for using the web developer vagrant machine -->
 <html>
   <body>
-    <h1>Welcome</h1>
-    Get docker container informations with "sudo docker ps -a"
-    Get IPAddress of docker containers with "sudo docker inspect -f "{{.NetworkSettings.IPAddress}}" 'container name'"
+    <h1>Welcome web developer.</h1>
+
+    <br>
+    Here are some helpful commands. <br>
+
+    <ul>
+      <li>Show informations on the state of docker containers
+        <ul><li>sudo docker ps -a</ul><br>
+      <li>Show the IP address of the apache server
+        <ul><li>"sudo docker inspect -f "{{.NetworkSettings.IPAddress}}" 'container name'"</ul><br>
+    </ul>
   </body>
 </html>
