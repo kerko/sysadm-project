@@ -39,6 +39,7 @@ We will provide a development environment with the following software:
 \item Wireshark for debugging
 \item Tools for mysql( mysql-workbench,mysql-client)
 \item Filezilla for FTP 
+\item htop for monitoring
 \end{itemize}
 Following Docker containers will also run in the Vagrant provided \gls{VM}:
 \begin{itemize}
@@ -79,6 +80,9 @@ While working with the machine we noticed that the standard values for Vagrant \
 Since we decided to run our web server and mysql server in Docker containers and not the actual \gls{VM}, we looked for the best way this would be accomplished. We found the approved Docker module in the Puppet forge which made it really easy to manage Docker containers via Puppet. All we needed was to add \mint{Puppet}|include Docker| followed by some \mint{Puppet}|Docker::image| and \mint{Puppet}|Docker::run| types to get our two containers up and running.The full sources are available in the appendix and on our github repository. The containers are linked to each other so that the web server can access the DB, without the need for exposed ports on the DB server itself. Also we shared the \verb|www| directory into the web server container so that it can instantly start to serve the web page the developer created.
 
 After having a enormous struggle to find a way to properly manage the Docker containers in regards to restarts or shutdowns, since using the standard Docker commands did not work in their expected way. We finally figured out the module generates and uses operating system build-in service files to manage the Docker containers and every container resembles its own service. This was one of the reasons why we couldn't properly shutdown the Docker containers, since the services were started via Upstart and init scripts they automatically restarted every time we shut them down. After this discovery we tried managing the containers via the \verb|service| command, which yielded much better results. It took several hours to troubleshoot these issues which was partially caused by the very sparse documentation of the module. Some issues remain with the Docker module, when the web server get's killed and the mysql server is still running, its not possible for the module to start it again. For some reason the container exits right after starting. Using a manual run command gets the server running again so there seems to be some kind of problem with the init scripts the module is creating.
+
+\subsection{welcome Module}
+To ease up the usage on start, we created a welcome module in puppet. The module ensures the existance of two files on the system. One is a html file, filled with some helpful usage commands and a list of the installed software. The other one is a simple shellscript which gets placed on the desktop and emerges the firefox browser on execution. The templates for the script and the html page can be found in the modules template folder. Due to a unpredictable delay on startup of the web server, we disagreed with the idea of putting the script on autostart.
 
 
 
