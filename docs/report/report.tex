@@ -1,13 +1,13 @@
 \input{preamble.tex}
 
-\title{Building Development Environments using Docker and Vagrant }
+\title{Building consistent Development Environments using Docker and Vagrant }
 \author{Urs Oberdorf (141627) and Jan Kerkenhoff (141628)}
 
 \begin{document}
 
 \maketitle
 
-\abstract{Abstract needs to be entered here}
+\abstract{Supplying and managing consistent development environments across several different devices and different operating systems is a pain. Using Vagrant and Docker we set out to give an easy, consistent and scalable solution offering preconfigured Vagrant Images that contain the whole development machine, including docker containers to model the production environment you develop against. Only downside of our approach is the fact that developing now takes place in the virtual machine and not the developer machines native operating system}
 
 \thispagestyle{empty}
 
@@ -86,7 +86,7 @@ After having a enormous struggle to find a way to properly manage the Docker con
 \section{Conclusions}
 
 We achieved all the things we planned for in a very efficient matter, the combination of Puppet and Vagrant helps so to streamline many things and the automation is really good.  The enables you to scale this solution easily to several hundreds of workstations without any additional work. There are still some limitations when it comes to required hardware with our approach instead of the traditional Vagrant work flow of developing on your own machine and using Vagrant just for your emulating the production environment. The usage of Docker allowed us to reduce the hardware requirements significantly, since we are able to run the servers inside our \gls{VM} and this way creates almost no overhead which allowed us to keep the requirements at a reasonable level. We also had to learn that using premade modules for Puppet always has its catch, on the one side they provide a fast solution to your problem, but in our case we spend a lot of time getting it to run they way we needed to and some issues are still present. Since the documentation of the module is kind of very parse its hard to determine if this are bugs or just desired behavior of the module. 
-After all you can say that the combination of  Vagrant is very powerful to make it easy to model the production environments of a company. We believe Docker and Vagrant have a bright future ahead, making the lives of system administrators and developers easier and give them more time to focus on the important things.
+After all you can say that the combination of  Vagrant is very powerful to make it easy to model the production environments of a company. We believe Docker and Vagrant have a bright future ahead, making the lives of system administrators and developers easier and give them more time to focus on the important things.  Only downside of our approach is that we use an \gls{VM} to develop in, this creates some performance drawbacks if computation intensive tasks need to be done regularly during the development of the application.
 
 \section{User Hand Book}
 
