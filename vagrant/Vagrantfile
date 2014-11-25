@@ -7,7 +7,7 @@ SYNCFOLDER_HOST_SHARE = SYNCFOLDER_ROOT + "/share"
 SYNCFOLDER_GUEST_SHARE = "/home/vagrant/share"
 
 SYNCFOLDER_HOST_WWW = SYNCFOLDER_ROOT + "/www"
-SYNCFOLDER_GUEST_WWW = "/var/www"
+SYNCFOLDER_GUEST_WWW = "/home/vagrant/src"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
@@ -21,9 +21,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      vb.gui = true
      # Set hostname
      vb.name = "webDevMachine"
+     # Set RAM and CPU count
      vb.memory = 1024
      vb.cpus = 2
-
   end
 
    # Puppet
