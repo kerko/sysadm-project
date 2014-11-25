@@ -16,8 +16,8 @@ We provide a development environment with the following software:
 
 Following Docker containers will also run in the Vagrant provided VM:
 
-*Webserver (apache)
-*Database (mysql)
+* Webserver (apache)
+* Database (mysql)
 
 The basebox can also be downloaded at: [`BaseBox`](https://s3.eu-central-1.amazonaws.com/vagrantsysadm/package.box)
 
