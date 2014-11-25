@@ -1,4 +1,20 @@
-# Install the WebUpd8 Repository and specified Packages in Ubunut 14.04
+# == Class: atom
+    #
+    # Module to add a repository that contains atom to ubuntu and install the
+    # latest version of Atom.
+    #
+    # === Examples
+    #
+    # include atom
+    #
+    # === Authors
+    #
+    # Jan Kerkenhoff <jan.kerkenhoff@gmail.com>
+    #
+    # === Copyright
+    #
+    # Copyright 2014 Jan Kerkenhoff.
+    #
 class atom {
   include apt
 

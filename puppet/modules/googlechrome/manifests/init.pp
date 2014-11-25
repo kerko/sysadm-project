@@ -1,4 +1,20 @@
-#Install GoogleChrome Browser with the puppet apt module
+# == Class: googlechrome
+    #
+    # Module to add a repository that contains Chrome to ubuntu 14.04 and
+    # install the latest version of Chrome.
+    #
+    # === Examples
+    #
+    # include googlechrome
+    #
+    # === Authors
+    #
+    # Urs Oberdorf <urs.oberdorf@hig.no .com>
+    #
+    # === Copyright
+    #
+    # Copyright 2014 Urs Oberdorf.
+    #
 class googlechrome (
   $url_key  = 'https://dl-ssl.google.com/linux/linux_signing_key.pub',
   $url_repo = 'http://dl.google.com/linux/chrome/deb/',

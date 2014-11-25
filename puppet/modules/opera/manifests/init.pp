@@ -1,4 +1,20 @@
-#Install Opera Bowser with the puppet apt module
+# == Class: opera
+    #
+    # Module to add a repository that contains Opera to ubuntu 14.04 and
+    # install the latest version of Opera.
+    #
+    # === Examples
+    #
+    # include opera
+    #
+    # === Authors
+    #
+    # Urs Oberdorf <urs.oberdorf@hig.no .com>
+    #
+    # === Copyright
+    #
+    # Copyright 2014 Urs Oberdorf.
+    #
 class opera (
   $url_key  = 'http://deb.opera.com/archive.key',
   $url_repo = 'http://deb.opera.com/opera/',
